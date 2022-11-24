@@ -2,4 +2,4 @@
 
 Follow the trajectory of an ion implanted into a solid.
 
-![Ion Implantation](trajectory.png)
+<img src="trajectory.png" width="50%"></img>
