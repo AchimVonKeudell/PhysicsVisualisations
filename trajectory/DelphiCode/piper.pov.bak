@@ -1,0 +1,240 @@
+  #include "colors.inc"
+  #include "textures.inc"
+#include "shapes.inc"
+light_source { < 10, 10, -10 >
+color White
+}             
+light_source { < 10, 10, 10 >
+color White                     
+}                                  
+background { color White }
+camera {
+ right      < -1.33, 0, 0 > 
+ up         < 0, 1, 0 >
+ direction  < 0, 0, 1 >
+ location   < 1.5, 5, 1.5 >
+ look_at    < 0,0, 0 >
+}
+cylinder { <0,0,0>,<0,0,100>,           0.1 pigment { color Blue } }
+cylinder { <           0.006,0.001,1.000>,
+           <0.027,0.054,1.998>,
+           0.1 pigment { color Red } }
+cylinder { <           0.027,0.054,1.998>,
+           <0.054,0.116,2.996>,
+           0.1 pigment { color Red } }
+cylinder { <           0.054,0.116,2.996>,
+           <0.070,0.182,3.994>,
+           0.1 pigment { color Red } }
+cylinder { <           0.070,0.182,3.994>,
+           <0.078,0.249,4.991>,
+           0.1 pigment { color Red } }
+cylinder { <           0.078,0.249,4.991>,
+           <0.091,0.311,5.989>,
+           0.1 pigment { color Red } }
+cylinder { <           0.091,0.311,5.989>,
+           <0.102,0.379,6.987>,
+           0.1 pigment { color Red } }
+cylinder { <           0.102,0.379,6.987>,
+           <0.046,0.513,7.976>,
+           0.1 pigment { color Red } }
+cylinder { <           0.046,0.513,7.976>,
+           <-0.008,0.662,8.964>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.008,0.662,8.964>,
+           <-0.069,0.855,9.943>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.069,0.855,9.943>,
+           <-0.083,1.044,10.925>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.083,1.044,10.925>,
+           <-0.034,1.238,11.905>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.034,1.238,11.905>,
+           <0.037,1.435,12.883>,
+           0.1 pigment { color Red } }
+cylinder { <           0.037,1.435,12.883>,
+           <0.135,1.632,13.858>,
+           0.1 pigment { color Red } }
+cylinder { <           0.135,1.632,13.858>,
+           <0.204,1.794,14.842>,
+           0.1 pigment { color Red } }
+cylinder { <           0.204,1.794,14.842>,
+           <0.279,1.977,15.823>,
+           0.1 pigment { color Red } }
+cylinder { <           0.279,1.977,15.823>,
+           <0.320,2.142,16.808>,
+           0.1 pigment { color Red } }
+cylinder { <           0.320,2.142,16.808>,
+           <0.358,2.531,17.728>,
+           0.1 pigment { color Red } }
+cylinder { <           0.358,2.531,17.728>,
+           <0.395,2.902,18.656>,
+           0.1 pigment { color Red } }
+cylinder { <           0.395,2.902,18.656>,
+           <0.446,3.276,19.583>,
+           0.1 pigment { color Red } }
+cylinder { <           0.446,3.276,19.583>,
+           <0.501,3.641,20.512>,
+           0.1 pigment { color Red } }
+cylinder { <           0.501,3.641,20.512>,
+           <0.491,4.036,21.430>,
+           0.1 pigment { color Red } }
+cylinder { <           0.491,4.036,21.430>,
+           <0.491,4.421,22.354>,
+           0.1 pigment { color Red } }
+cylinder { <           0.491,4.421,22.354>,
+           <0.551,4.838,23.260>,
+           0.1 pigment { color Red } }
+cylinder { <           0.551,4.838,23.260>,
+           <0.616,5.279,24.156>,
+           0.1 pigment { color Red } }
+cylinder { <           0.616,5.279,24.156>,
+           <0.699,5.709,25.055>,
+           0.1 pigment { color Red } }
+cylinder { <           0.699,5.709,25.055>,
+           <0.768,6.149,25.950>,
+           0.1 pigment { color Red } }
+cylinder { <           0.768,6.149,25.950>,
+           <0.816,6.564,26.858>,
+           0.1 pigment { color Red } }
+cylinder { <           0.816,6.564,26.858>,
+           <0.850,6.997,27.759>,
+           0.1 pigment { color Red } }
+cylinder { <           0.850,6.997,27.759>,
+           <0.881,7.379,28.683>,
+           0.1 pigment { color Red } }
+cylinder { <           0.881,7.379,28.683>,
+           <0.967,7.737,29.612>,
+           0.1 pigment { color Red } }
+cylinder { <           0.967,7.737,29.612>,
+           <1.007,8.112,30.539>,
+           0.1 pigment { color Red } }
+cylinder { <           1.007,8.112,30.539>,
+           <1.075,8.490,31.462>,
+           0.1 pigment { color Red } }
+cylinder { <           1.075,8.490,31.462>,
+           <1.113,8.837,32.399>,
+           0.1 pigment { color Red } }
+cylinder { <           1.113,8.837,32.399>,
+           <1.050,9.055,33.373>,
+           0.1 pigment { color Red } }
+cylinder { <           1.050,9.055,33.373>,
+           <0.805,9.428,34.268>,
+           0.1 pigment { color Red } }
+cylinder { <           0.805,9.428,34.268>,
+           <0.484,9.880,35.100>,
+           0.1 pigment { color Red } }
+cylinder { <           0.484,9.880,35.100>,
+           <-0.077,10.219,35.855>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.077,10.219,35.855>,
+           <-0.587,10.598,36.627>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.587,10.598,36.627>,
+           <-0.945,11.025,37.458>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.945,11.025,37.458>,
+           <-1.127,11.536,38.298>,
+           0.1 pigment { color Red } }
+cylinder { <           -1.127,11.536,38.298>,
+           <-1.271,12.065,39.134>,
+           0.1 pigment { color Red } }
+cylinder { <           -1.271,12.065,39.134>,
+           <-1.457,12.601,39.958>,
+           0.1 pigment { color Red } }
+cylinder { <           -1.457,12.601,39.958>,
+           <-1.704,13.146,40.759>,
+           0.1 pigment { color Red } }
+cylinder { <           -1.704,13.146,40.759>,
+           <-2.103,13.665,41.515>,
+           0.1 pigment { color Red } }
+cylinder { <           -2.103,13.665,41.515>,
+           <-2.421,14.235,42.273>,
+           0.1 pigment { color Red } }
+cylinder { <           -2.421,14.235,42.273>,
+           <-3.333,14.399,42.650>,
+           0.1 pigment { color Red } }
+cylinder { <           -3.333,14.399,42.650>,
+           <-4.316,14.271,42.779>,
+           0.1 pigment { color Red } }
+cylinder { <           -4.316,14.271,42.779>,
+           <-5.249,14.374,43.123>,
+           0.1 pigment { color Red } }
+cylinder { <           -5.249,14.374,43.123>,
+           <-5.555,14.995,43.845>,
+           0.1 pigment { color Red } }
+cylinder { <           -5.555,14.995,43.845>,
+           <-5.577,15.594,44.646>,
+           0.1 pigment { color Red } }
+cylinder { <           -5.577,15.594,44.646>,
+           <-6.142,16.083,45.310>,
+           0.1 pigment { color Red } }
+cylinder { <           -6.142,16.083,45.310>,
+           <-6.968,15.604,45.013>,
+           0.1 pigment { color Red } }
+cylinder { <           0.119,-0.311,6.264>,
+           <-0.123,-0.989,5.569>,
+           0.1 pigment { color Red } }
+cylinder { <           0.226,1.517,16.033>,
+           <-0.154,0.950,15.302>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.154,0.950,15.302>,
+           <-0.097,0.328,14.522>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.097,0.328,14.522>,
+           <0.742,0.868,14.588>,
+           0.1 pigment { color Red } }
+cylinder { <           0.742,0.868,14.588>,
+           <1.690,1.109,14.380>,
+           0.1 pigment { color Red } }
+cylinder { <           1.690,1.109,14.380>,
+           <2.575,0.997,13.929>,
+           0.1 pigment { color Red } }
+cylinder { <           2.575,0.997,13.929>,
+           <3.207,0.561,13.288>,
+           0.1 pigment { color Red } }
+cylinder { <           3.207,0.561,13.288>,
+           <3.788,0.036,12.666>,
+           0.1 pigment { color Red } }
+cylinder { <           1.206,2.393,17.198>,
+           <1.817,1.806,16.667>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.565,-0.460,14.122>,
+           <-1.526,-0.699,14.255>,
+           0.1 pigment { color Red } }
+cylinder { <           0.572,3.731,21.635>,
+           <0.819,3.051,20.944>,
+           0.1 pigment { color Red } }
+cylinder { <           1.156,9.565,33.083>,
+           <1.248,10.278,33.778>,
+           0.1 pigment { color Red } }
+cylinder { <           1.732,8.650,32.763>,
+           <2.679,8.564,32.455>,
+           0.1 pigment { color Red } }
+cylinder { <           2.679,8.564,32.455>,
+           <3.633,8.860,32.505>,
+           0.1 pigment { color Red } }
+cylinder { <           3.633,8.860,32.505>,
+           <3.823,9.603,33.146>,
+           0.1 pigment { color Red } }
+cylinder { <           0.772,8.778,33.509>,
+           <0.982,8.112,32.794>,
+           0.1 pigment { color Red } }
+cylinder { <           0.982,8.112,32.794>,
+           <1.222,7.436,32.096>,
+           0.1 pigment { color Red } }
+cylinder { <           1.172,10.443,35.559>,
+           <1.109,11.175,36.236>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.566,10.430,36.749>,
+           <-0.037,9.849,36.130>,
+           0.1 pigment { color Red } }
+cylinder { <           -1.441,14.422,42.324>,
+           <-0.855,15.039,42.850>,
+           0.1 pigment { color Red } }
+cylinder { <           -0.855,15.039,42.850>,
+           <-0.421,15.696,43.466>,
+           0.1 pigment { color Red } }
+cylinder { <           -4.840,13.783,42.428>,
+           <-4.328,14.439,42.983>,
+           0.1 pigment { color Red } }
