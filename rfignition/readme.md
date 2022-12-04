@@ -2,4 +2,4 @@
 
 Ignition in an RF discharge.
 
-<img src="/rgignition/Animationen/rfignition.png" width="600"></img>
+<img src="/rfignition/Animationen/rfignition.png" width="600"></img>
