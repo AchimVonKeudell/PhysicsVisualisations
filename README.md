@@ -23,4 +23,4 @@ These small Python scripts were created to accompany the lectures <b>Introductio
   - particle drifts
   - magnetron
 * streamer
-* trajectory
+* trajectory (ion implantation in a solid)
