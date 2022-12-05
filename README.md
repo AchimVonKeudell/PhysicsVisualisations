@@ -7,3 +7,20 @@ These small Python scripts were created to accompany the lectures <b>Introductio
   - drift diffusion model for 2 liquids (electrons, ions)
   - drift diffusion model for 3 liquids (electrons, ions, neg. ions)
 * etch (isotropic and anisotropic plasma etching)
+* fermi (stochastic heating, Fermi acceleartion)
+* fluid (2 fluid model for electron/ion density and velocity)
+  - Debye Length
+  - plasma frequency
+* gaskinetic (thermalization of a 2d distribution)
+* growth (growth of interfaces via random deposition)
+  - ballistic deposition
+  - surface diffusion
+* mathieu (trajectory of an ion in a quadrupole)
+* pic1d (1d particle in cell code)
+* rfiedf (IEDF of ions impinging on a substrate)
+* rfignition 
+* singleparticle
+  - particle drifts
+  - magnetron
+* streamer
+* trajectory
