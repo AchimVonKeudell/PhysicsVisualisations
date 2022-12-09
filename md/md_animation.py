@@ -21,16 +21,16 @@ tend = 1e-12
 deltat = 5e-16
 dtreplot = 1e-15
 steps = int(tend/dtreplot)
-ProjectileEnergy = 500 # energy in eV
+ProjectileEnergy = 300 # energy in eV
 masstarget = 26
 massprojectile = 26
-temperature = 300 # temperature bath outer atoms
+temperature = 200 # temperature bath outer atoms
 tautemp = 2e-15 # energy relaxation time
 
 BasisNB = 2
-xNB = 12
-yNB = 12
-zNB = 8
+xNB = 6
+yNB = 6
+zNB = 10
 maxnb = xNB*yNB*zNB*BasisNB+1
 
 dneighbours = 5*1e-10
@@ -51,10 +51,10 @@ class atom:
         self.neighbourNB = neighbourNB
   
 atoms = []
-for i in range(maxnb):
-  atoms.append(atom(r=np.zeros(3),dr=np.zeros(3),v=np.zeros(3),a=np.zeros(3),
-                   Ekin=0,Epot=0,name='atom',mass=1,
-                   neighbour=np.zeros(50),neighbourNB=10))
+#for i in range(maxnb):
+#  atoms.append(atom(r=np.zeros(3),dr=np.zeros(3),v=np.zeros(3),a=np.zeros(3),
+#                   Ekin=0,Epot=0,name='atom',mass=1,
+#                   neighbour=np.zeros(50),neighbourNB=10))
 
 class basisatom:
     def __init__(self,r):
@@ -110,12 +110,30 @@ zlim = 2*zsize/1e-10*0.5
 # Projectile
 ProjectileV = np.sqrt(ProjectileEnergy*el*2/(28*amu));
 
-atoms[0].r = np.array([1e-10,2e-10,zlim*1e-10])
-atoms[0].dr = np.zeros(3)
-atoms[0].v = np.array([0,0,-ProjectileV]) 
-atoms[0].a = np.zeros(3)
-atoms[0].name = 'pro'
-atoms[0].mass = massprojectile*amu
+AtomNB = 0
+for i in range(-1,2):
+  for j in range(-1,2):
+    for k in range(3):
+        AtomNB += 1
+        atoms.append(atom(r=np.array([i*alattice,j*alattice,zlim*1e-10-k*alattice]),
+                  dr=np.zeros(3),
+                  v=np.array([0,0,-ProjectileV]),
+                  a=np.zeros(3),
+                  Ekin=0,
+                  Epot=0,
+                  name='pro',
+                  mass=massprojectile*amu,
+                  neighbour=np.zeros(50),
+                  neighbourNB=10))
+ProjectileNB = AtomNB        
+
+
+#atoms[0].r = np.array([0.9*alattice,0.9*alattice,zlim*1e-10])
+#atoms[0].dr = np.zeros(3)
+#atoms[0].v = np.array([-ProjectileV*0.01,-ProjectileV*0.01,-ProjectileV]) 
+#atoms[0].a = np.zeros(3)
+#atoms[0].name = 'pro'
+#atoms[0].mass = massprojectile*amu
     
 # generate basis bcc
 basis[0].r = np.zeros(3)
@@ -127,24 +145,36 @@ vrms = np.sqrt(kB*temperature/(masstarget*amu))
 vrms = 0
   
 i = 0
-corner = [-xsize/2,-ysize/2,-zsize/2]
+corner = np.array([-xsize/2,-ysize/2,-zsize/2])
 for x in range(xNB):
     for y in range(yNB):
          for z in range(zNB):
             for k in range(BasisNB):
-                   i += 1
+                   AtomNB += 1
                    offset = np.array([x,y,z])
                    offset2 = np.array([0,0,0])
-                   atoms[i].r = corner + (offset+basis[k].r+offset2)*alattice                   
-                   atoms[i].dr = np.array([0,0,0])
-                   atoms[i].v = vrms*np.array([np.random.normal(),np.random.normal(),np.random.normal()])                 
-                   atoms[i].a = np.array([0,0,0])
-                   atoms[i].name = 'Al'
-                   atoms[i].mass = masstarget*amu
+                   atoms.append(atom(r=corner + (offset+basis[k].r+offset2)*alattice,
+                                     dr=np.zeros(3),
+                                     v=vrms*np.array([np.random.normal(),np.random.normal(),np.random.normal()]),
+                                     a=np.zeros(3),
+                                     Ekin=0,
+                                     Epot=0,
+                                     name='Al',
+                                     mass=masstarget*amu,
+                                     neighbour=np.zeros(50),
+                                     neighbourNB=10))
+                   
+                                     
+                   #atoms[i].r = corner + (offset+basis[k].r+offset2)*alattice                   
+                   #atoms[i].dr = np.array([0,0,0])
+                   #atoms[i].v = vrms*np.array([np.random.normal(),np.random.normal(),np.random.normal()])                 
+                   #atoms[i].a = np.array([0,0,0])
+                   #atoms[i].name = 'Al'
+                   #atoms[i].mass = masstarget*amu
 
-AtomNB = i+1
+#AtomNB = i+1
 GenerateNeighbours()
-                
+print(AtomNB)                
 
 # -------------------------------------------------------------------
 # Morse Potential
@@ -261,6 +291,8 @@ def animate(k):
            skinnb += 1
            ekinsum += atoms[i].v[0]**2+atoms[i].v[1]**2+atoms[i].v[2]**2    
     tempskin = 0.5*atoms[1].mass*ekinsum/(1.5*AtomNB*kB)
+    #print(tempskin)
+    #print(ekinsum)
     tempscale = np.sqrt(1+deltat/tautemp*(temperature/tempskin-1));
     
     # rescale outer atoms 
@@ -276,7 +308,7 @@ def animate(k):
   x1 = []
   y1 = []
   z1 = []
-  for i in range(1,AtomNB):
+  for i in range(ProjectileNB+1,AtomNB):
         x1.append(atoms[i].r[0]/1e-10)
         y1.append(atoms[i].r[1]/1e-10)
         z1.append(atoms[i].r[2]/1e-10)
@@ -286,9 +318,16 @@ def animate(k):
   linet.set_3d_properties(z1)
   
   # projectile
-  linep.set_xdata([atoms[0].r[0]/1e-10])
-  linep.set_ydata([atoms[0].r[1]/1e-10]) 
-  linep.set_3d_properties([atoms[0].r[2]/1e-10])
+  xp = []
+  yp = []
+  zp = []
+  for i in range(ProjectileNB):
+        xp.append(atoms[i].r[0]/1e-10)
+        yp.append(atoms[i].r[1]/1e-10)
+        zp.append(atoms[i].r[2]/1e-10)
+  linep.set_xdata(xp)
+  linep.set_ydata(yp) 
+  linep.set_3d_properties(zp)
           
   axp.view_init(20,35+t/tend*180)        
   
