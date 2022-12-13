@@ -8,7 +8,7 @@ These small Python scripts were created to accompany the lectures <b>Introductio
   - drift diffusion model for 2 liquids (electrons, ions)
   - drift diffusion model for 3 liquids (electrons, ions, neg. ions)
 * etch (isotropic and anisotropic plasma etching)
-* fermi (stochastic heating, Fermi acceleartion)
+* fermi (stochastic heating, Fermi acceleration)
 * fluid (2 fluid model for electron/ion density and velocity)
   - Debye Length
   - plasma frequency
