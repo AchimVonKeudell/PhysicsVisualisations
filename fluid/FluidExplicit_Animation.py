@@ -14,7 +14,8 @@ import matplotlib.animation as animation
 model = 'plasmafrequency'
 model = 'debye'
 #model = 'ionoscillation'
-model = 'test'
+model = 'waveelectron'
+model = 'waveion'
 
 
 if model == 'plasmafrequency':
@@ -28,6 +29,8 @@ if model == 'plasmafrequency':
     dist = 'cosinuselectrons' # initial distribution
     efieldrange = 3e2 # range of efield plot in V/m
     vrange = 3e2 # range of velocity plot in km/s
+    boundarycondition = 'default'
+    zwidth = 0.1 # width of simulation volume in m
 if model == 'debye':
     dtplot = 2e-11 # time distance in between frames for animation
     simulationtime = 10e-9 # total length of simulation in s
@@ -39,6 +42,8 @@ if model == 'debye':
     dist = 'gauss' # initial distribution
     efieldrange = 1e2 # range of efield plot in V/m
     vrange = 3e2 # range of velocity plot in km/s
+    boundarycondition = 'default'
+    zwidth = 0.1 # width of simulation volume in m
 if model == 'ionoscillation':
     dtplot = 1e-9 # time distance in between frames for animation
     simulationtime = 1000e-9 #9 total length of simulation in s
@@ -50,18 +55,40 @@ if model == 'ionoscillation':
     dist = 'cosinus' # initial distribution
     efieldrange = 3e2 # range of efield plot in V/m
     vrange = 3e2 # range of velocity plot in km/s
-if model == 'test':
-    dtplot = 2e-11 # time distance in between frames for animation
-    simulationtime = 10e-9 # total length of simulation in s
+    boundarycondition = 'default'
+    zwidth = 0.1 # width of simulation volume in m
+if model == 'waveelectron':
+    dtplot = 1e-10 # time distance in between frames for animation
+    simulationtime = 100e-9 # total length of simulation in s
     dt=1e-11 # time constant for iteration
-    num = 1e8  # 1e8 # collision frequency
-    animationfile = 'debye.mp4'
+    num = 0  # 1e8 # collision frequency
+    animationfile = 'waveelectron.mp4'
     n0 = 1e14 # charge density
+    fexcitation = 5e7 #excitation v in central region
+    aexcitation = 5
     perturbation = 0.02 # perturbation of the quasineutrality
-    dist = 'gauss' # initial distribution
+    dist = 'wave' # initial distribution
     efieldrange = 1e2 # range of efield plot in V/m
     vrange = 3e2 # range of velocity plot in km/s
-
+    boundarycondition = 'fixed'
+    zwidth = 0.1 # width of simulation volume in m
+if model == 'waveion':
+    dtplot = 1e-9 # time distance in between frames for animation
+    simulationtime = 100e-8 # total length of simulation in s
+    dt=1e-11 # time constant for iteration
+    num = 0  # 1e8 # collision frequency
+    animationfile = 'waveion.mp4'
+    fexcitation = 1e6
+    aexcitation = 0.05
+    n0 = 1e14 # charge density
+    perturbation = 0.02 # perturbation of the quasineutrality
+    dist = 'wave' # initial distribution
+    efieldrange = 1e2 # range of efield plot in V/m
+    vrange = 3e2 # range of velocity plot in km/s
+    boundarycondition = 'fixed'
+    zwidth = 0.1 # width of simulation volume in m
+    
+    
 # --------------------------------------------------------------------------
 # Define initial constants
 # --------------------------------------------------------------------------
@@ -80,7 +107,6 @@ p0 = 1 # pressure in Pa
 tn = 300 # gas temperature
 te0 = 3 # electron temperature in eV
 
-zwidth = 0.1 # width of simulation volume in m
 V0 = 0
 
 gammae = 1 # isothermal for electrons
@@ -91,7 +117,7 @@ Ti = 300
 
 
 ldebye = np.sqrt(eps0*kB*Te/(n0*el**2))
-fpe = np.sqrt(n0*el**2/(eps0*me))*2*np.pi
+wpe = np.sqrt(n0*el**2/(eps0*me))
 
 
 znb = 500
@@ -190,14 +216,23 @@ if dist == 'cosinus':
         vi[i]=0;
         te[i]=te0;
         z[i]=-zwidth/2+(i-1)/(znb)*zwidth
+if dist =='wave':
+    for i in range(0,znb+1):
+        te[i]=te0;
+        z[i]=-zwidth/2+(i-1)/(znb-1)*zwidth
+        breitee = 0.002*zwidth
+        breiteion = 0.02*zwidth
+        # perturbation as time dependent gaussian trigger in velocity
+        ne[i] = n0#+perturbation*n0*np.exp(-(z[i])**2/breitee**2)*1/(breitee)*breiteion
+        ni[i] = n0      
+        ve[i]=0;
+        vi[i]=0;
 elif dist =='gauss':
     for i in range(0,znb+1):
         te[i]=te0;
         z[i]=-zwidth/2+(i-1)/(znb-1)*zwidth
         breitee = 0.2*zwidth
         breiteion = 0.02*zwidth
-      
-        # perturbation*10*zwidth
         ne[i] = n0+perturbation*n0*np.exp(-(z[i])**2/breitee**2)*1/(breitee)*breiteion
         ni[i] = n0+perturbation*n0*np.exp(-(z[i])**2/breiteion**2)*1/(breiteion)*breiteion
         ve[i]=0;
@@ -232,7 +267,7 @@ ax[1].legend(loc=2,fontsize=6)
 infobox = ''
 infobox += 'nu: ' + "{:.0e}".format(num) + ' (1/s) \n'   
 infobox += 'l_Debye: ' + "{:.0e}".format(ldebye) + ' (m) \n'   
-infobox += 'f_plasma,e: ' + "{:.0e}".format(fpe) + ' (1/s)'   
+infobox += 'w_plasma,e: ' + "{:.0e}".format(wpe) + ' (1/s)'   
 #if model == "electronoscillation":
 #    infobox += 'nu: ' + "{:.0e}".format(num) + ' (1/s)'   
 props = dict(boxstyle='round', facecolor='lightblue', alpha=0.5) 
@@ -254,6 +289,11 @@ def animate(k):
      CalculatePotential()
      
      t += dt
+     
+     #if dist=='wave':
+     #    zpt = int(znb/2)
+     #    ne[zpt] = n0+perturbation*n0*np.sin(t*1e8)
+         
      # -----------------------------------------------
      #  Inner Nodes
      # ----------------------------------------------
@@ -263,57 +303,90 @@ def animate(k):
         neright = 0.5*(ne[i]+ne[i+1]) 
         veleft = 0.5*(ve[i-1]+ve[i])
         veright = 0.5*(ve[i]+ve[i+1]) 
-        dne[i]=(-dt/(dz)*(neright*veright-neleft*veleft))
-        dve[i]=(dt*q*el/me*EFeld[i] - gammae*kB*Te/(me*ne[i])*(neright-neleft)/(dz)*dt
+        Eleft = 0.5*(EFeld[i-1]+EFeld[i])
+        Eright = 0.5*(EFeld[i+1]+EFeld[i])
+        #dne[i]=(-dt/(dz)*(neright*veright-neleft*veleft))
+        dne[i]=(-dt/(dz)*(ne[i]*(veright-veleft)+ve[i]*(neright-neleft)))
+        dve[i]=(dt*q*el/me*(EFeld[i]) - gammae*kB*Te/(me*ne[i])*(neright-neleft)/(dz)*dt
                  -ve[i]*num*dt-ve[i]*(veright-veleft)/dz*dt)
-
+        
         q = 1
         nileft = 0.5*(ni[i-1]+ni[i])
         niright = 0.5*(ni[i]+ni[i+1]) 
         vileft = 0.5*(vi[i-1]+vi[i])
         viright = 0.5*(vi[i]+vi[i+1]) 
-        dni[i]=(-dt/(dz)*(niright*viright-nileft*vileft))
-        dvi[i]=(dt*q*el/mion*EFeld[i] - gammai*kB*Ti/(mion*ni[i])*(niright-nileft)/(dz)*dt
+        #dni[i]=(-dt/(dz)*(niright*viright-nileft*vileft))
+        dni[i]=(-dt/(dz)*(ni[i]*(viright-vileft)+vi[i]*(niright-nileft)))
+        dvi[i]=(dt*q*el/mion*(EFeld[i]) - gammai*kB*Ti/(mion*ni[i])*(niright-nileft)/(dz)*dt
                  -vi[i]*num*dt-vi[i]*(viright-vileft)/dz*dt)
 
-                
-     #-------------------------------------------
-     # BC 
-     # ------------------------------------------}   
-     q = -1
-     neleft = 0.5*(ne[znb]+ne[1])
-     neright = 0.5*(ne[1]+ne[2]) 
-     veleft = 0.5*(ve[znb]+ve[1])
-     veright = 0.5*(ve[1]+ve[2]) 
-     dne[1]=(-dt/(dz)*(neleft*veleft-neright*veright)*(-1))
-     dve[1]=(dt*q*el/me*EFeld[1] - gammae*kB*Te/(me*ne[1])*(neleft-neright)*(-1)/(dz)*dt
-                 -ve[1]*num*dt-ve[1]*(veleft-veright)*(-1)/dz*dt)
 
-     q = 1
-     nileft = 0.5*(ni[znb]+ni[1])
-     niright = 0.5*(ni[1]+ni[2]) 
-     vileft = 0.5*(vi[znb]+vi[1])
-     viright = 0.5*(vi[1]+vi[2]) 
-     dni[1]=(-dt/(dz)*(nileft*vileft-niright*viright)*(-1))
-     dvi[1]=(dt*q*el/mion*EFeld[1] - gammai*kB*Ti/(mion*ni[1])*(nileft-niright)*(-1)/(dz)*dt
+        # add perturbation in ve or vi for wave models        
+        if model == 'waveelectron':
+          dve[i] += np.sin(t*fexcitation*2*np.pi)*aexcitation*np.exp(-(z[i])**2/breitee**2)*1/(breitee)
+        if model == 'waveion':
+          dvi[i] += np.sin(t*fexcitation*2*np.pi)*aexcitation*np.exp(-(z[i])**2/breiteion**2)*1/(breiteion)
+        
+     if boundarycondition == 'fixed':   
+       #-------------------------------------------
+       # BC left
+       # ------------------------------------------}   
+       dne[1]=0
+       dve[1]=dve[2]
+       dni[1]=0
+       dvi[1]=dvi[2]
+     
+       #-------------------------------------------
+       # BC right
+       # ------------------------------------------}   
+       dne[znb]=0
+       dve[znb]=dve[znb-1]
+       dni[znb]=0
+       dvi[znb]=dvi[znb-1]             
+     else:   
+       #-------------------------------------------
+       # BC left
+       # ------------------------------------------}   
+       #BC electrons
+       q = -1
+       neleft = 0.5*(ne[znb]+ne[1])
+       neright = 0.5*(ne[1]+ne[2]) 
+       veleft = 0.5*(ve[znb]+ve[1])
+       veright = 0.5*(ve[1]+ve[2]) 
+       dne[1]=(-dt/(dz)*(neleft*veleft-neright*veright)*(-1))
+       dve[1]=(dt*q*el/me*EFeld[1] - gammae*kB*Te/(me*ne[1])*(neright-neleft)/(dz)*dt
+                 -ve[1]*num*dt-ve[1]*(veleft-veright)*(-1)/dz*dt)
+       #BC ions
+       q = 1
+       nileft = 0.5*(ni[znb]+ni[1])
+       niright = 0.5*(ni[1]+ni[2]) 
+       vileft = 0.5*(vi[znb]+vi[1])
+       viright = 0.5*(vi[1]+vi[2]) 
+       dni[1]=(-dt/(dz)*(nileft*vileft-niright*viright)*(-1))
+       dvi[1]=(dt*q*el/mion*EFeld[1] - gammai*kB*Ti/(mion*ni[1])*(niright-nileft)/(dz)*dt
                  -vi[1]*num*dt-ve[1]*(vileft-viright)*(-1)/dz*dt)
 
      
-     q = -1
-     neleft = 0.5*(ne[znb-1]+ne[znb])
-     neright = 0.5*(ne[znb]+ne[1]) 
-     veleft = 0.5*(ve[znb-1]+ve[znb])
-     veright = 0.5*(ve[znb]+ve[1]) 
-     dne[znb]=(-dt/(dz)*(neleft*veleft-neright*veright)*(-1))
-     dve[znb]=(dt*q*el/me*EFeld[znb] - gammae*kB*Te/(me*ne[znb])*(neleft-neright)*(-1)/(dz)*dt
+       #-------------------------------------------
+       # BC right
+       # ------------------------------------------}   
+       #BC electrons
+       q = -1
+       neleft = 0.5*(ne[znb-1]+ne[znb])
+       neright = 0.5*(ne[znb]+ne[1]) 
+       veleft = 0.5*(ve[znb-1]+ve[znb])
+       veright = 0.5*(ve[znb]+ve[1]) 
+       dne[znb]=(-dt/(dz)*(neleft*veleft-neright*veright)*(-1))
+       dve[znb]=(dt*q*el/me*EFeld[znb] - gammae*kB*Te/(me*ne[znb])*(neright-neleft)/(dz)*dt
                  -ve[znb]*num*dt-ve[znb]*(veleft-veright)*(-1)/dz*dt)
-     q = 1
-     nileft = 0.5*(ni[znb-1]+ni[znb])
-     niright = 0.5*(ni[znb]+ni[1]) 
-     vileft = 0.5*(vi[znb-1]+vi[znb])
-     viright = 0.5*(vi[znb]+vi[1]) 
-     dni[znb]=(-dt/(dz)*(nileft*vileft-niright*viright)*(-1))
-     dvi[znb]=(dt*q*el/mion*EFeld[znb] - gammai*kB*Ti/(mion*ni[znb])*(nileft-niright)*(-1)/(dz)*dt
+       #BC ions
+       q = 1
+       nileft = 0.5*(ni[znb-1]+ni[znb])
+       niright = 0.5*(ni[znb]+ni[1]) 
+       vileft = 0.5*(vi[znb-1]+vi[znb])
+       viright = 0.5*(vi[znb]+vi[1]) 
+       dni[znb]=(-dt/(dz)*(nileft*vileft-niright*viright)*(-1))
+       dvi[znb]=(dt*q*el/mion*EFeld[znb] - gammai*kB*Ti/(mion*ni[znb])*(niright-nileft)/(dz)*dt
                  -vi[znb]*num*dt-vi[znb]*(vileft-viright)*(-1)/dz*dt)
 
      
@@ -321,6 +394,7 @@ def animate(k):
      # Propagate densities
      # ----------------------------------------------}
      for i in range(1,znb+1):
+         #ve[i] += np.sin(t*1e7)*1000*np.exp(-(z[i])**2/breitee**2)*1/(breitee)*breiteion
          ne[i] += dne[i];
          ni[i] += dni[i];
          ve[i] += dve[i];
@@ -345,7 +419,7 @@ def animate(k):
   #print(sum(ne-ni))
 
 anim = animation.FuncAnimation(fig,animate,interval=1,frames=steps)
-anim.save(animationfile,fps=25,dpi=180)
+anim.save(animationfile,fps=25,dpi=300)
 
 print('End Simulation')
 
