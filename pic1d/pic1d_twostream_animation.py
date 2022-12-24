@@ -49,7 +49,7 @@ if model == 'SIunits':
    qsuper = n0*NBBins/NBParticles
 
 ldebye = np.sqrt(eps0*kB*Te/(n0*el**2))
-fpe = np.sqrt(n0*el**2/(eps0*me))*2*np.pi
+wpe = np.sqrt(n0*el**2/(eps0*me))
 
 deltax = (xmax-xmin)/NBBins
 widthx = NBBins*deltax
@@ -172,7 +172,7 @@ axp.legend(loc=1,fontsize=6)
 infobox = ''
 infobox += 'n0: ' + "{:.0e}".format(n0) + ' (1/m^3)\n'
 infobox += 'l_Debye: ' + "{:.0e}".format(ldebye) + ' (m)\n'    
-infobox += 'fpe: ' + "{:.0e}".format(fpe) + ' (1/s)'    
+infobox += 'wpe: ' + "{:.0e}".format(wpe) + ' (1/s)'    
 props = dict(boxstyle='round', facecolor='lightblue', alpha=0.8) 
 ax.text(0.05,0.95,infobox, fontsize=6,bbox=props,verticalalignment='top',transform=axp.transAxes)
 

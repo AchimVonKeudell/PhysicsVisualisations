@@ -9,10 +9,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-#model = 'plasmaonset'
-#model = 'dc'
+model = 'plasmaonset'
+model = 'dc'
 #model = 'rf'
-model = 'doublelayer'
+#model = 'doublelayer' # is not working
 
 NBParticles = 10000
 NBBins = 200
@@ -96,7 +96,7 @@ qsuper = n0/NBParticles*NBBins
 print('Start simulation')
 
 ldebye = np.sqrt(eps0*kB*Te/(n0*el**2))
-fpe = np.sqrt(n0*el**2/(eps0*me))*2*np.pi
+wpe = np.sqrt(n0*el**2/(eps0*me))
 
 deltax = (xmax-xmin)/(NBBins)
 widthx = NBBins*deltax
@@ -327,7 +327,7 @@ infobox += '#bins: ' + "{:.0f}".format(NBBins) + '\n'
 infobox += 'n0: ' + "{:.0e}".format(n0) + ' (1/m^3)\n'
 infobox += 'Te: ' + "{:.1f}".format(Te) + ' (eV)\n'
 infobox += 'l_Debye: ' + "{:.0e}".format(ldebye) + ' (m)\n'    
-infobox += 'fpe: ' + "{:.0e}".format(fpe) + ' (1/s)\n'    
+infobox += 'wpe: ' + "{:.0e}".format(wpe) + ' (1/s)\n'    
 infobox += 'nu_el: ' + "{:.0e}".format(nuel) + ' (1/s)\n'    
 infobox += 'nu_ion: ' + "{:.0e}".format(nuion) + ' (1/s)'    
 props = dict(boxstyle='round', facecolor='lightblue', alpha=0.8) 
