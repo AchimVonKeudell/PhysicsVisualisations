@@ -30,3 +30,7 @@ These small Python scripts were created to accompany the lectures <b>Introductio
   - magnetron
 * streamer
 * trajectory (ion implantation in a solid)
+
+Videos are also uploaded at www.youtube.com/@AchimvonKeudell
+
+Further documentation will be found at: https://www.ep2.rub.de/index.php/lecture-notes
