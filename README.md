@@ -12,13 +12,15 @@ These small Python scripts were created to accompany the lectures <b>Introductio
 * fluid (2 fluid model for electron/ion density and velocity)
   - Debye Length
   - plasma frequency
-* fresnel (Airy formula, light raytracing)  
+* fresnel (Airy formula for Farby Perot filter, light raytracing)  
 * gaskinetic (thermalization of a 2d distribution)
 * growth (growth of interfaces via random deposition)
   - ballistic deposition
   - surface diffusion
 * hc (hollow cathode effect) 
+* huygens (Huygens principle for the reflection and diffraction of light)
 * line (solution of the wave equation in time and space on a cable/fibre)
+* mach (mach cones)
 * mathieu (trajectory of an ion in a quadrupole)
 * pic1d (1d particle in cell code)
 * rfiedf (IEDF of ions impinging on a substrate)
