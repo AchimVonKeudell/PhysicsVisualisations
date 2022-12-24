@@ -2,4 +2,8 @@
 
 Trajectory of an ion in a quadrupole.
 
-<img src="/mathieu/Animation/qms28_279.png" width="600"></img>
+
+
+https://user-images.githubusercontent.com/100088227/209437321-8be7d3e9-4621-4638-9f29-a08d1ff8ee34.mp4
+
+
