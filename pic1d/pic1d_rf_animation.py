@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 model = 'plasmaonset'
-model = 'dc'
+#model = 'dc'
 #model = 'rf'
 #model = 'doublelayer' # is not working
 
@@ -28,7 +28,7 @@ if model == 'plasmaonset':
     n0 = 1e15
     nuel = 1e7
     nuion = 1e6
-    animationname = 'plasmaonset.gif'
+    animationname = 'plasmaonset.mp4'
     useinitial = True
     initialfilename = 'plasmaonset.dat'
 if model == 'dc':

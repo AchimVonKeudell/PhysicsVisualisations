@@ -35,7 +35,7 @@ if model == 'SIunits':
    xmax = 0.01
    dt = 1e-10
    dtplot = 2e-10
-   tend = 5e-9
+   tend = 500e-9
 
    el = 1.6e-19
    me = 6e-31
