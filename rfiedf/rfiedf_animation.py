@@ -9,6 +9,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+model = 'nocollisions'
+model = 'collisions'
+
+if model == 'nocollisions':
+   animationfile = 'rfiedfnocollisions.mp4'
+   num = 0 # 1e6 # collision frequency
+   #Schichtmodel='Matrix' # Randschichtmodell
+   Schichtmodel='Child-Langmuir' # Randschichtmodell
+   mion = 4 # in amu
+if model == 'collisions':
+   animationfile = 'rfiedfcollisions.mp4'
+   num = 4e6 # 1e6 # collision frequency
+   #Schichtmodel='Matrix' # Randschichtmodell
+   Schichtmodel='Child-Langmuir' # Randschichtmodell
+   mion = 4 # in amu
+
 # ----------------------------------------------------------------------------
 #
 # Monte Carlo Simulation der IEDF an der Elektrode in einer RF Randschicht 
@@ -24,15 +40,12 @@ smax = 0.008 # in m
 V0 = 700 # Peak to peak
 fRF = 13.6 # in MHz
 omegaRF = 2*np.pi*fRF*1e6 # angular frequency
-mion = 4 # in amu
+
 dt = 1e-10 # Schrittweite der Zeitschritte
 NBParticles = 500
 qion = 1 # in Elementarladungen
-#Schichtmodel='Matrix' # Randschichtmodell
-Schichtmodel='Child-Langmuir' # Randschichtmodell
 Ewidth = 5 # Width energy bin in eV
 Emax = 500 # Max energy scale
-num = 4e6 # 1e6 # collision frequency
 nup = dt*num # probaility of collision per time step
 
 # store IEDF
@@ -50,7 +63,7 @@ axp.set(xlim=(0,Emax),ylim=(0,1))
 infobox = ''
 infobox += 'Model: ' + Schichtmodel + ' \n' 
 infobox += 'V0: ' + "{:.0f}".format(V0) + ' (V)\n' 
-infobox += 'fRF: ' + "{:.2f}".format(fRF) + ' (Hz)\n' 
+infobox += 'fRF: ' + "{:.2f}".format(fRF) + ' (MHz)\n' 
 infobox += 'Te: ' + "{:.1f}".format(Te) + ' (eV)\n' 
 infobox += 'mion: ' + "{:.0f}".format(mion) + ' (amu)\n' 
 infobox += 'num: ' + "{:.2e}".format(num) + ' (1/s)' 
@@ -64,7 +77,8 @@ def animate(k):
     
     global IEDF,Escan,Particles,IEDFNorm
     
-    microsteps = 100 # calculate 10 particles before image is generated
+    print(k,' of ',NBParticles)
+    microsteps = 100 # calculate 100 particles before image is generated
     for k in range(microsteps):
         Particles += 1
         PhiStart = np.random.rand()*2*np.pi # phase of entry in the sheath
@@ -117,7 +131,7 @@ def animate(k):
     
 
 anim = animation.FuncAnimation(fig,animate,interval=1,frames=NBParticles)
-anim.save('rfiedfanimation.gif',fps=25,dpi=180)
+anim.save(animationfile,fps=25,dpi=300)
 
 plt.plot(Escan,IEDFNorm)
 plt.xlabel('Ion energy [eV]')
