@@ -20,6 +20,7 @@ These small Python scripts were created to accompany the lectures <b>Introductio
   - ballistic deposition
   - surface diffusion
 * hc (hollow cathode effect) 
+* hertz (dipole radiation)
 * huygens (Huygens principle for the reflection and diffraction of light)
 * line (solution of the wave equation in time and space on a cable/fibre)
 * mach (mach cones)
