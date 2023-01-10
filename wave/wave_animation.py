@@ -14,11 +14,17 @@ import matplotlib.animation as animation
 model = 'fixed boundaries'
 model = 'absorbing boundaries'
 model = 'open boundaries'
+model = 'traveling peak'
+model = 'plane wave'
+model = 'diffractionslit'
+model = 'diffractiondoubleslit'
 
 dtplot = 2e-4 # time distance in between frames for animation
 simulationtime = 400e-3 # total length of simulation in s
 dt=1e-4 # time constant for iteration
 gamma = 0 # damping in the medium
+omega = 1e3 # frequency of plane wave
+amplitude = 0.05
     
 if model == 'fixed boundaries':
     animationfile = 'wave2d_fixed.mp4'
@@ -27,11 +33,32 @@ if model == 'fixed boundaries':
 if model == 'open boundaries':
     animationfile = 'wave2d_open.mp4'
     BoundaryCondition = 'open'
-    InitialCondition = 'Direction'
+    InitialCondition = 'Zero'
 if model == 'absorbing boundaries':
     animationfile = 'wave2d_absorbing.mp4'
     BoundaryCondition = 'absorbing'
     InitialCondition = 'Zero'
+if model == 'traveling peak':
+    animationfile = 'wave2d_travelingpeak.mp4'
+    BoundaryCondition = 'absorbing'
+    InitialCondition = 'Direction'
+if model == 'plane wave':
+    animationfile = 'wave2d_planewave.mp4'
+    BoundaryCondition = 'absorbing'
+    InitialCondition = 'Line'
+    Slit = False
+if model == 'diffractionslit':
+    animationfile = 'wave2d_slit.mp4'
+    BoundaryCondition = 'absorbing'
+    InitialCondition = 'Line'
+    Slit = True
+    DoubleSlit = False
+if model == 'diffractiondoubleslit':
+    animationfile = 'wave2d_doubleslit.mp4'
+    BoundaryCondition = 'absorbing'
+    InitialCondition = 'Line'
+    Slit = False
+    DoubleSlit = True
     
 # --------------------------------------------------------------------------
 # Define initial constants
@@ -43,6 +70,10 @@ steps = int(simulationtime/dtplot) # total number of frames
 Xsize = 100
 peakwidth = 3 # in pixels
 dx = 0.2
+SlitPositionX = 20
+SlitPositionY = 50
+SlitWidth = 5
+DoubleSlitDistance = 30
 
 field = np.zeros([Xsize+1,Xsize+1,3])
 dfield = np.zeros([Xsize+1,Xsize+1])
@@ -57,9 +88,19 @@ X, Y = np.meshgrid(x, x)
 # --------------------------------------------------------------------------
 
 # Starting Condition Amplitude 
-for i in range(Xsize+1): 
-  for j in range(Xsize+1): 
-    field[i,j,0] = np.exp(-((i-Xsize/2)**2+(j-Xsize/2)**2)/(peakwidth/dx)**2)
+if InitialCondition == 'Zero':
+  for i in range(Xsize+1): 
+    for j in range(Xsize+1): 
+      field[i,j,0] = np.exp(-((i-Xsize/2)**2+(j-Xsize/2)**2)/(peakwidth/dx)**2)
+if InitialCondition == 'Direction':
+  for i in range(Xsize+1): 
+    for j in range(Xsize+1): 
+      field[i,j,0] = np.exp(-((i-Xsize/2)**2+(j-Xsize/2)**2)/(peakwidth/dx)**2)
+if InitialCondition == 'Line':
+  for i in range(Xsize+1): 
+    for j in range(Xsize+1): 
+      field[i,j,0] = 0
+
    
 vphase = 3e2
 gamma0 = 0
@@ -74,9 +115,10 @@ for i in range(2,Xsize-1):
       if InitialCondition == 'Zero':
          dfield[i,j] = 0
       elif InitialCondition == 'Direction':
-         dfield[i,j] = -vphase*((field[i+1,j,0]-field[i-1,j,0])/(2*dx)#+
-                                #(field[i,j+1,0]-field[i,j-1,0])/(2*dx))
-                                ) 
+         dfield[i,j] = -vphase*((field[i+1,j,0]-field[i-1,j,0])/(2*dx)) 
+      elif InitialCondition == 'Line':
+         dfield[i,1] = 0.02*np.cos(0*omega)*omega  
+         #dfield[i,1] = -vphase*((field[i+1,1,0]-field[i-1,1,0])/(2*dx)) 
 
 # Starting Condition Ghost Point in Time }
 for i in range(Xsize-1):
@@ -138,7 +180,6 @@ def animate(k):
                                      - alpha**2*(field[i,j,1]-field[i,j-1,1])
                                        )
 
-
     # outer nodes 
      if BoundaryCondition=='fixed':
         for i in range(Xsize+1):
@@ -158,6 +199,30 @@ def animate(k):
           field[i,1,2] = field[i,2,1] + (alpha-1)/(alpha+1)*(field[i,2,2]-field[i,1,1])
           field[Xsize,i,2] = field[Xsize-1,i,1] + (alpha-1)/(alpha+1)*(field[Xsize-1,i,2]-field[Xsize,i,1])
           field[i,Xsize,2] = field[i,Xsize-1,1] + (alpha-1)/(alpha+1)*(field[i,Xsize-1,2]-field[i,Xsize,1])
+
+     # excitation 
+     if InitialCondition == 'Line':
+       for i in range(1,Xsize+1):      
+          field[i,1,2] = amplitude*np.sin(t*omega)
+   
+     if Slit:
+       for i in range(1,Xsize+1):
+           if i<SlitPositionY-0.5*SlitWidth:
+             field[i,SlitPositionX,2] = 0
+           if i>SlitPositionY+0.5*SlitWidth:
+             field[i,SlitPositionX,2] = 0
+     
+     if DoubleSlit:
+       for i in range(1,Xsize+1):
+           if i<SlitPositionY-DoubleSlitDistance*0.5-0.5*SlitWidth:
+             field[i,SlitPositionX,2] = 0
+           if (i>SlitPositionY-DoubleSlitDistance*0.5+0.5*SlitWidth
+             and i<SlitPositionY+DoubleSlitDistance*0.5-0.5*SlitWidth):
+             field[i,SlitPositionX,2] = 0
+           if i>SlitPositionY+DoubleSlitDistance*0.5+0.5*SlitWidth:
+             field[i,SlitPositionX,2] = 0
+             
+         
 
      # write array back 
      for i in range(Xsize+1):
