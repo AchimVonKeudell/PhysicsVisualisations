@@ -16,8 +16,8 @@ model = 'absorbing boundaries'
 model = 'open boundaries'
 model = 'traveling peak'
 model = 'plane wave'
-model = 'diffractionslit'
-model = 'diffractiondoubleslit'
+model = 'diffraction slit'
+model = 'diffraction doubleslit'
 
 dtplot = 2e-4 # time distance in between frames for animation
 simulationtime = 400e-3 # total length of simulation in s
@@ -47,13 +47,13 @@ if model == 'plane wave':
     BoundaryCondition = 'absorbing'
     InitialCondition = 'Line'
     Slit = False
-if model == 'diffractionslit':
+if model == 'diffraction slit':
     animationfile = 'wave2d_slit.mp4'
     BoundaryCondition = 'absorbing'
     InitialCondition = 'Line'
     Slit = True
     DoubleSlit = False
-if model == 'diffractiondoubleslit':
+if model == 'diffraction doubleslit':
     animationfile = 'wave2d_doubleslit.mp4'
     BoundaryCondition = 'absorbing'
     InitialCondition = 'Line'
