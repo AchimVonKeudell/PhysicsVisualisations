@@ -30,7 +30,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * streamer
 * trajectory (ion implantation in a solid)
 
-## Optics
+## Optics and E-Dynamics
 * fresnel (Airy formula for Farby Perot filter, light raytracing)  
 * hertz (dipole radiation)
 * huygens (Huygens principle for the reflection and diffraction of light)
@@ -41,6 +41,8 @@ These small Python scripts were created to accompany physics lectures as illustr
 ## Mechanics
 * kepler (helio and geocentric world view)
 * planet (planet orbits)
+* planet3body (N body problem in mechanics)
+* lineexcited (solution of the 1d wave eqations for excited species)
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
 
