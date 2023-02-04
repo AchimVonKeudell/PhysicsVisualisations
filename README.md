@@ -40,9 +40,10 @@ These small Python scripts were created to accompany physics lectures as illustr
 
 ## Mechanics
 * kepler (helio and geocentric world view)
+* doublependulum (chaos)
+* lineexcited (solution of the 1d wave eqations for excited species)
 * planet (planet orbits)
 * planet3body (N body problem in mechanics)
-* lineexcited (solution of the 1d wave eqations for excited species)
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
 
