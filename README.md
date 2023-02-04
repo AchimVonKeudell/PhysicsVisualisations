@@ -15,10 +15,6 @@ These small Python scripts were created to accompany physics lectures as illustr
 * fluid (2 fluid model for electron/ion density and velocity)
   - Debye Length
   - plasma frequency
-* gaskinetic (thermalization of a 2d distribution)
-* growth (growth of interfaces via random deposition)
-  - ballistic deposition
-  - surface diffusion
 * hc (hollow cathode effect) 
 * mathieu (trajectory of an ion in a quadrupole)
 * pic1d (1d particle in cell code)
@@ -28,22 +24,36 @@ These small Python scripts were created to accompany physics lectures as illustr
   - particle drifts
   - magnetron
 * streamer
-* trajectory (ion implantation in a solid)
 
 ## Optics and E-Dynamics
+### Optics
 * fresnel (Airy formula for Farby Perot filter, light raytracing)  
-* hertz (dipole radiation)
 * huygens (Huygens principle for the reflection and diffraction of light)
 * line (solution of the wave equation in time and space on a cable/fibre)
-* mach (mach cones)
 * wave (diffraction, boundary conditions)
+### E-Dynamics
+* hertz (dipole radiation)
 
 ## Mechanics
+### Gravitation
 * kepler (helio and geocentric world view)
 * doublependulum (chaos)
-* lineexcited (solution of the 1d wave eqations for excited species)
 * planet (planet orbits)
 * planet3body (N body problem in mechanics)
+### Waves
+* lineexcited (solution of the 1d wave eqations for excited species)
+* mach (mach cones)
+
+## Thermodynamics
+* gaskinetic (thermalization of a 2d distribution)
+
+## Solid State Physics
+* growth (growth of interfaces via random deposition)
+  - ballistic deposition
+  - surface diffusion
+* trajectory (ion trajetcory in a solid BCA appeoximation)
+* md (Molceular dynamics of ion solid interaction)
+
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
 
