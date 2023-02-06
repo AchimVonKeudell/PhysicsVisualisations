@@ -48,6 +48,9 @@ These small Python scripts were created to accompany physics lectures as illustr
 ## Thermodynamics
 * gaskinetic (thermalization of a 2d distribution)
 
+## Atom physics
+* cross (Rutherford, Langevin scattering)
+
 ## Solid State Physics
 * growth (growth of interfaces via random deposition)
   - ballistic deposition
