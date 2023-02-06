@@ -41,7 +41,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * planet (planet orbits)
 * planet3body (N body problem in mechanics)
 ### Waves
-* lineexcited (solution of the 1d wave eqations for excited species)
+* lineexcited (solution of the 1d wave equations for excited species)
 * mach (mach cones)
 
 ## Thermodynamics
