@@ -41,8 +41,9 @@ These small Python scripts were created to accompany physics lectures as illustr
 * planet (planet orbits)
 * planet3body (N body problem in mechanics)
 ### Waves
-* lineexcited (solution of the 1d wave equations for excited species)
+* lineexcited (solution of the 1d wave equations)
 * mach (mach cones)
+* wave (see also above)
 
 ## Thermodynamics
 * gaskinetic (thermalization of a 2d distribution)
@@ -51,7 +52,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * growth (growth of interfaces via random deposition)
   - ballistic deposition
   - surface diffusion
-* trajectory (ion trajetcory in a solid BCA appeoximation)
+* trajectory (ion trajectory in a solid BCA approximation)
 * md (Molceular dynamics of ion solid interaction)
 
 
