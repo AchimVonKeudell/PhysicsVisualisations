@@ -53,7 +53,7 @@ These small Python scripts were created to accompany physics lectures as illustr
   - ballistic deposition
   - surface diffusion
 * trajectory (ion trajectory in a solid BCA approximation)
-* md (Molceular dynamics of ion solid interaction)
+* md (Molecular dynamics of ion solid interaction)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
