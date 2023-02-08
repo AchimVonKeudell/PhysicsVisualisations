@@ -52,6 +52,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * cross (Rutherford, Langevin scattering)
 
 ## Solid State Physics
+* beam bending (elastic properties of materials, example steel)
 * growth (growth of interfaces via random deposition)
   - ballistic deposition
   - surface diffusion
