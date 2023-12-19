@@ -58,6 +58,7 @@ These small Python scripts were created to accompany physics lectures as illustr
   - surface diffusion
 * trajectory (ion trajectory in a solid BCA approximation)
 * md (Molecular dynamics of ion solid interaction)
+* Sticking (Vibrationally assisted sticking)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
