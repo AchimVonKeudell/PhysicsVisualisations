@@ -36,6 +36,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 
 ## Mechanics
 ### Gravitation
+* brachistochrone (fastest travel time of a rolling ball down a slope))
 * kepler (helio and geocentric world view)
 * doublependulum (chaos)
 * planet (planet orbits)
