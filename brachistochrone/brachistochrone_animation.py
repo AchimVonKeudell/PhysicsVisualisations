@@ -29,7 +29,7 @@ k = 0.6
 radiusroll = 0.05
 
 # output file
-animationfile = 'brachistrohrone_1.gif'
+animationfile = 'brachistohrone_1.gif'
 
 # number of frames generated, time step
 steps = 700
