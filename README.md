@@ -45,6 +45,8 @@ These small Python scripts were created to accompany physics lectures as illustr
 * lineexcited (solution of the 1d wave equations)
 * mach (mach cones)
 * wave (see also above)
+### Fluids
+* iceberg (floating objects in water)
 
 ## Thermodynamics
 * gaskinetic (thermalization of a 2d distribution)
