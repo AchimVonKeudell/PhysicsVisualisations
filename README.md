@@ -31,6 +31,8 @@ These small Python scripts were created to accompany physics lectures as illustr
 * huygens (Huygens principle for the reflection and diffraction of light)
 * line (solution of the wave equation in time and space on a cable/fibre)
 * wave (diffraction, boundary conditions)
+* optik (geometric optics of a lens)
+* rainbow (diffraction in a raindrop)
 ### E-Dynamics
 * hertz (dipole radiation)
 
