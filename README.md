@@ -33,9 +33,10 @@ These small Python scripts were created to accompany physics lectures as illustr
 * wave (diffraction, boundary conditions)
 * optik (geometric optics of a lens)
 * rainbow (diffraction in a raindrop)
+* icebow (diffraction in an icecrystal)
 ### E-Dynamics
 * hertz (dipole radiation)
-
+  
 ## Mechanics
 ### Gravitation
 * brachistochrone (fastest travel time of a rolling ball down a slope))
