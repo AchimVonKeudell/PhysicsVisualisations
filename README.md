@@ -50,6 +50,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * wave (see also above)
 ### Fluids
 * iceberg (floating objects in water)
+* lattice (vortex formation, Karmann streets)
 
 ## Thermodynamics
 * gaskinetic (thermalization of a 2d distribution)
@@ -65,6 +66,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * trajectory (ion trajectory in a solid BCA approximation)
 * md (Molecular dynamics of ion solid interaction)
 * sticking (Vibrationally assisted sticking)
+* icecrystal (crystallization on a hexagonal lattice)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
