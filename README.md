@@ -53,13 +53,14 @@ These small Python scripts were created to accompany physics lectures as illustr
 * lattice (vortex formation, Karmann streets)
 
 ## Thermodynamics
-* gaskinetic (thermalization of a 2d distribution)
+* gas kinetic (thermalization of a 2d distribution)
 
-## Atom physics
+## Atom physics, Quantum physics
 * cross (Rutherford, Langevin scattering)
+* qm1d (quantum tunneling in 1d)
 
 ## Solid State Physics
-* beam bending (elastic properties of materials, example steel)
+* beam bending (elastic properties of materials, for example steel)
 * growth (growth of interfaces via random deposition)
   - ballistic deposition
   - surface diffusion
