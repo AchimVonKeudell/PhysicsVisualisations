@@ -68,6 +68,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * md (Molecular dynamics of ion solid interaction)
 * sticking (Vibrationally assisted sticking)
 * icecrystal (crystallization on a hexagonal lattice)
+* ionrough (ion-induced roughening)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
