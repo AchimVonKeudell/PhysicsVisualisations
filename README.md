@@ -58,6 +58,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 ## Atom physics, Quantum physics
 * cross (Rutherford, Langevin scattering)
 * qm1d (quantum tunneling in 1d)
+* hatom (2d and 3d wave functions)
 
 ## Solid State Physics
 * beam bending (elastic properties of materials, for example steel)
@@ -69,6 +70,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * sticking (Vibrationally assisted sticking)
 * icecrystal (crystallization on a hexagonal lattice)
 * ionrough (ion-induced roughening)
+* ising (2d ising model of magnetism)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
