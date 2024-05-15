@@ -2,7 +2,7 @@
 
 ![eyecatcher](https://user-images.githubusercontent.com/100088227/209437970-9c330da3-e5ef-4a33-9812-a1c5cda53f42.gif)
 
-These small Python scripts were created to accompany physics lectures as illustrations of different phenomena. A special emphasis is on plasma topics following the lectures <b>Introduction to Plasma Physics I and II</b>. The fluid or particle codes used are deliberately kept as simple as possible to illustrate to students an introduction to the simulation of plasma phenomena. Accurate quantitative simulation is reserved for well-known simulation platforms such as Plasimo, nonPDPSIM, etc. The following visualisations are implemented
+These small Python scripts were created to accompany physics lectures as illustrations of different phenomena. A special emphasis is on plasma topics following the lectures <b>Introduction to Plasma Physics I and II</b>. The fluid or particle codes used are deliberately kept as simple as possible to illustrate to students an introduction to the simulation of plasma phenomena. Accurate quantitative simulation is reserved for well-known simulation platforms such as Plasimo, nonPDPSIM, etc. The following visualisations are implemented.
 
 ## Plasma physics
 * bubble (cavitation by plasma in liquids)
@@ -71,6 +71,9 @@ These small Python scripts were created to accompany physics lectures as illustr
 * icecrystal (crystallization on a hexagonal lattice)
 * ionrough (ion-induced roughening)
 * ising (2d ising model of magnetism)
+
+## Electrochemistry
+* cv (cyclovoltametry)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
