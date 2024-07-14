@@ -54,6 +54,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 
 ## Thermodynamics
 * gas kinetic (thermalization of a 2d distribution)
+* carnot (thermodynamic cycles of Carnot, Stirling, Otto, Diesel)
 
 ## Atom physics, Quantum physics
 * cross (Rutherford, Langevin scattering)
