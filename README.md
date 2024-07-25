@@ -54,6 +54,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 
 ## Thermodynamics
 * gas kinetic (thermalization of a 2d distribution)
+* diffusion (single particle model of gas mixing by diffusion)
 * carnot (thermodynamic cycles of Carnot, Stirling, Otto, Diesel)
 * vanderwaals (phase transitions of a real gas)
 
