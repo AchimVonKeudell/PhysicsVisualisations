@@ -27,7 +27,8 @@ These small Python scripts were created to accompany physics lectures as illustr
 
 ## Optics and E-Dynamics
 ### Optics
-* fresnel (Airy formula for Farby Perot filter, light raytracing)  
+* airy (filtering of light by an etalon or Fabry Perot filter)
+* fresnel (light raytracing in a thin film)  
 * huygens (Huygens principle for the reflection and diffraction of light)
 * line (solution of the wave equation in time and space on a cable/fibre)
 * wave (diffraction, boundary conditions)
