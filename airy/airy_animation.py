@@ -1,9 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul 30 15:55:47 2024
+#
+# Animation of an etalon
+# Examples for pyhsics lectures
+# Achim von Keudell
+# Ruhr University Bochum, 2024
+#
 
-@author: Achim
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -14,7 +15,10 @@ from matplotlib.ticker import (
 def delta(lamb,d,n,angle):
     return 2*np.pi/lamb*n*d*np.cos(angle)
 
-
+# -----------------------------------------------------------------
+# Parameter
+# -----------------------------------------------------------------
+R = 0.7
 d = 4000*1e-9 
 n = 1.5
 angle = np.pi/6
@@ -28,15 +32,12 @@ def lamb2nu(x):
 def nu2lamb(x):
     return 3e8 / (x*1e12) / 1e-9
 
-R = 0.7
 
 F = 4*R/(1-R)**2
-
 fscan = 1/(1+F*np.sin(deltascan)**2)
 
 fig = plt.figure(figsize=(8,4))
 gs = gridspec.GridSpec(1, 2, width_ratios=[2, 1]) 
-#fig.tight_layout()
 ax = fig.add_subplot(gs[0])
 
 line1 = ax.plot(nuscan/1e12,fscan)[0]
