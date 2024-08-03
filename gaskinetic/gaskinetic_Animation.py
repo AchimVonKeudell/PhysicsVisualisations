@@ -1,10 +1,12 @@
 #
 # Thermalization of a distribution function
-# Examples for plasma pyhsics lectures
+# Examples for pyhsics lectures
 # Achim von Keudell
 # Ruhr University Bochum, 2022
 #
 
+
+from numba import jit
 import numpy as np
 import matplotlib.pyplot as plt 
 import matplotlib.animation as animation
@@ -12,8 +14,13 @@ import matplotlib.animation as animation
 # ------------------------------------------------------------------------
 # parameter
 # ------------------------------------------------------------------------ 
-#scaling = 'plotvsE'  # plot distribution vs. E
+scaling = 'plotvsE'  # plot distribution vs. E
 scaling = 'plotvsv' # plot distribution vs. |v|
+
+if scaling == 'plotvsv':
+  animationname = 'gaskineticvsv.mp4'
+if scaling == 'plotvsE':
+  animationname = 'gaskineticvsE.mp4'
 
 Natoms = 1000  
 L = 1 # size of volume in m
@@ -22,9 +29,9 @@ Ratom = 0.01 # size of helium atom in arbitrary units
 k = 1.38E-23 
 T = 300 # temperature
 
-dt = 0.5E-7
-dtplot = 1e-7
-simulationtime = 1e-4
+dt = 5E-6
+dtplot = 5e-6
+simulationtime = 2e-3
 steps = int(simulationtime/dtplot)
 
 NBbins = int(Natoms/5)
@@ -59,7 +66,7 @@ for i in range(Natoms+1):
     m = mass
     pavg = np.sqrt(2.*mass*1*k*T) # average kinetic energy p**2/(2mass) = (2/2)kT
     
-    phi = 2*np.pi*np.random.rand()
+    phi = 0.1*np.pi*np.random.rand()
     px = pavg*np.cos(phi)
     py = pavg*np.sin(phi)
 
@@ -78,7 +85,7 @@ radius = np.array(rlist)
 fig, ax = plt.subplots(1,2,figsize=(8,4.5))
 fig.tight_layout(pad=3)
 
-scatter1 = ax[0].plot(pos[:,0],pos[:,1],marker='o',markersize=1,lw=0)[0]
+scatter1 = ax[0].plot(pos[:,0],pos[:,1],marker='o',markersize=3,lw=0)[0]
 ax[0].set(xlabel='position',ylabel='position',xlim=(Lmin,Lmax),ylim=(Lmin,Lmax))
 ax[0].set_aspect('equal')
 
@@ -118,16 +125,8 @@ pos += (p/m)*(dt/2) # initial half-step
 # --------------------------------------------------------------------------
 # Main loop
 # --------------------------------------------------------------------------
-def animate(k):
-  global pos,p,t,time
-
-  print('time: '+ "{:.2f}".format(t/1e-6)+' microseconds of '+"{:.0f}".format(simulationtime/1e-6)+' microseconds' )
-  t += dt
-  while time<dtplot-dt:
-     time += dt   
-
-     pos += p/m*dt   
-     
+@jit(nopython = True)
+def findhitlist(pos):
      hitlist = []
      # find collisions
      for i in range(Natoms+1):
@@ -136,26 +135,18 @@ def animate(k):
            if d2 < (2*Ratom)**2: 
                if i!=j:
                    hitlist.append((i,j)) 
+     return hitlist     
+
+def animate(k):
+  global pos,p,t,time
+
+  print('time: '+ "{:.2f}".format(t/1e-6)+' microseconds of '+"{:.0f}".format(simulationtime/1e-6)+' microseconds' )
+  t += dt
+  while time<=dtplot-dt:
+     time += dt   
+
+     pos += p/m*dt   
      
-     hits = np.array(hitlist)           
-  
-     # change momentum
-     for i in range(len(hits)):
-         ii = hits[i,0]
-         jj = hits[i,1]         
-    
-         mtot = m+m    
-    
-         r1 = pos[ii]
-         r2 = pos[jj]
-         v1 = p[ii]/m
-         v2 = p[jj]/m
-         d = np.linalg.norm(r1 - r2)**2
-         u1 = v1 - 2*m / mtot * np.dot(v1-v2, r1-r2) / d * (r1 - r2)
-         u2 = v2 - 2*m / mtot * np.dot(v2-v1, r2-r1) / d * (r2 - r1)
-         p[ii] = u1*m
-         p[jj] = u2*m
-           
      # Bounce off walls
      for i in range(Natoms+1):
         if pos[i,0] < Lmin:
@@ -170,6 +161,29 @@ def animate(k):
         elif pos[i,1] > Lmax:
             p[i,1] = -p[i,1]       
             pos[i,1] = Lmax - abs(pos[i,1] % L)
+
+     hitlist =  findhitlist(pos)
+     #print(hitlist)
+     hits = np.array(hitlist)           
+  
+     # change momentum
+     for i in range(len(hits)):
+         ii = hits[i,0]
+         jj = hits[i,1]         
+      #   print(i)    
+         mtot = m+m    
+    
+         r1 = pos[ii]
+         r2 = pos[jj]
+         v1 = p[ii]/m
+         v2 = p[jj]/m
+         d = np.linalg.norm(r1 - r2)**2
+         u1 = v1 - 2*m / mtot * np.dot(v1-v2, r1-r2) / d * (r1 - r2)
+         u2 = v2 - 2*m / mtot * np.dot(v2-v1, r2-r1) / d * (r2 - r1)
+         p[ii] = u1*m
+         p[jj] = u2*m
+           
+
                
      t = t+dt
   
@@ -210,5 +224,5 @@ def animate(k):
   
   
 anim = animation.FuncAnimation(fig,animate,interval=1,frames=steps)
-anim.save('gaskineticvsE.gif',fps=25,dpi=180)
+anim.save(animationname,fps=25,dpi=300)
     
