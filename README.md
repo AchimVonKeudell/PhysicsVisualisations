@@ -58,6 +58,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * diffusion (single particle model of gas mixing by diffusion)
 * carnot (thermodynamic cycles of Carnot, Stirling, Otto, Diesel)
 * vanderwaals (phase transitions of a real gas)
+* Maxwells's daemon (entropy of information)
 
 ## Atom physics, Quantum physics
 * cross (Rutherford, Langevin scattering)
