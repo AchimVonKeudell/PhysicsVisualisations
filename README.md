@@ -15,7 +15,8 @@ These small Python scripts were created to accompany physics lectures as illustr
 * fluid (2 fluid model for electron/ion density and velocity)
   - Debye Length
   - plasma frequency
-* hc (hollow cathode effect) 
+* hc (hollow cathode effect)
+* icp (E to H transition in inductive discharges)
 * mathieu (trajectory of an ion in a quadrupole)
 * pic1d (1d particle in cell code)
 * rfiedf (IEDF of ions impinging on a substrate)
@@ -58,6 +59,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * diffusion (single particle model of gas mixing by diffusion)
 * carnot (thermodynamic cycles of Carnot, Stirling, Otto, Diesel)
 * vanderwaals (phase transitions of a real gas)
+* Maxwells's daemon (entropy of information)
 
 ## Atom physics, Quantum physics
 * cross (Rutherford, Langevin scattering)
