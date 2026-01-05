@@ -81,6 +81,10 @@ These small Python scripts were created to accompany physics lectures as illustr
 ## Electrochemistry
 * cv (cyclovoltametry)
 
+## Mathematics
+* fourier (Fourier series)
+* fractal (Koch curve, Sierpinski tree)
+
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
 
