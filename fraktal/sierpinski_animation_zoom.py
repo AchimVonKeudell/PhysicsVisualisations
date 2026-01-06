@@ -22,7 +22,7 @@ if model =='straight':
   sweep = 20
   randombranch = 0
   randomangle = 0
-  animationname = 'sierpinski_straight.gif'
+  animationname = 'sierpinski_straight_zoom.gif'
 if model =='straightrandom':
   name = 'Straight Tree, Random Branches'
   generations = 14
@@ -32,7 +32,7 @@ if model =='straightrandom':
   sweep = 20
   randombranch = 0.3
   randomangle =15
-  animationname = 'sierpinski_straight_random4.gif'
+  animationname = 'sierpinski_straight_random_zoom4.gif'
 if model =='curved':
   name = 'Curved Tree'  
   generations = 12
@@ -42,7 +42,7 @@ if model =='curved':
   sweep = 20
   randombranch = 0
   randomangle = 0
-  animationname = 'sierpinski_curved.gif'
+  animationname = 'sierpinski_curved_zoom.gif'
 if model =='bending':
   name = 'Bending Tree'  
   generations = 12
@@ -52,7 +52,7 @@ if model =='bending':
   sweep = 20
   randombranch = 0
   randomangle = 0
-  animationname = 'sierpinski_bending.gif'
+  animationname = 'sierpinski_bending_zoom.gif'
 
 def generate_sierpinski_tree(
     generations=6,
@@ -145,6 +145,10 @@ infobox +='branch scale: ' + "{:.2f}".format(branchscale)
 props = dict(boxstyle='round', facecolor='lightblue', alpha=0.5) 
 ax.text(0.05,0.95,infobox, fontsize=6,bbox=props,verticalalignment='top',transform=ax.transAxes)
 
+x0 = 0  
+y0 = 2
+xscale = 2
+yscale = 2
 
 # -----------------------------------------------------------------------------
 #
@@ -155,7 +159,32 @@ def animate(k):
     
   kindex = int(k/sweep)  
   print(kindex,' von ',generations,' branches ',len(tree[kindex])) 
-    
+  
+  ax.clear()
+  ax.set_aspect('equal')
+  ax.axis('off')
+  move = k/(generations*sweep)
+  x0 = 0 - move*0.5 
+  y0 = 2
+  xscale = 1+1*(1-move)
+  yscale = 1+1*(1-move)
+  xmin = x0-xscale
+  xmax = x0+xscale
+  ymin = y0-yscale
+  ymax = y0+yscale 
+  ax.set(xlim=(xmin,xmax),ylim=(ymin,ymax))
+
+  ax.text(0.05,0.95,infobox, fontsize=6,bbox=props,verticalalignment='top',transform=ax.transAxes)
+
+  if kindex>0:
+    for i in range(kindex):
+      generation = tree[i]    
+      for x, y, length, theta in generation:
+        ll = length
+        x_end = x + ll * np.cos(theta)
+        y_end = y + ll * np.sin(theta)
+        ax.plot([x, x_end], [y, y_end], color=colormap[i], linewidth=2-1*i/generations)
+      
   generation = tree[kindex]    
   for x, y, length, theta in generation:
         ll = length*(k-kindex*sweep)/(sweep)
