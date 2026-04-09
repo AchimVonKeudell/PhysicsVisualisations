@@ -44,6 +44,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * brachistochrone (fastest travel time of a rolling ball down a slope))
 * kepler (helio and geocentric world view)
 * doublependulum (chaos)
+* pendulum series (phase development)
 * planet (planet orbits)
 * planet3body (N body problem in mechanics)
 ### Waves
@@ -84,6 +85,8 @@ These small Python scripts were created to accompany physics lectures as illustr
 ## Mathematics
 * fourier (Fourier series)
 * fractal (Koch curve, Sierpinski tree)
+* lorentz (Lorenz attractor)
+* kuramoto (Kurmaoto-Sivahinsky equation)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
