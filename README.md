@@ -88,6 +88,8 @@ These small Python scripts were created to accompany physics lectures as illustr
 * lorentz (Lorenz attractor)
 * kuramoto (Kurmaoto-Sivahinsky equation)
 * grayscott (Gray Scott Model for a reaction diffusion model in 2d)
+* theodorus (Spiral of repeating right-angled triangles)
+* aizawa (Aizawa attractor)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
