@@ -87,6 +87,7 @@ These small Python scripts were created to accompany physics lectures as illustr
 * fractal (Koch curve, Sierpinski tree)
 * lorentz (Lorenz attractor)
 * kuramoto (Kurmaoto-Sivahinsky equation)
+* grayscott (Gray Scott Model for a reaction diffusion model in 2d)
 
 
 Videos are also uploaded at www.youtube.com/@AchimvonKeudell
